@@ -32,7 +32,7 @@ void salesSummary(double sales[], char *months[]) {
         }
     }
 
-    double average = calculateAverage(sales, MONTHS);
+    double average = average(sales, MONTHS);
 
     printf("Minimum sales: $%9.2f (%s)\n", min, months[minIndex]);
     printf("Maximum sales: $%9.2f (%s)\n", max, months[maxIndex]);
