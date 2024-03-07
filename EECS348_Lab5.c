@@ -1,12 +1,45 @@
 #include <stdio.h>
-#define MONTHS 12 
-//is a macro for months
-double averages(double[], int);
+//a macros for Months to make the code easier to work with
+#define MONTHS 12
+
+// creating functions for the program
+double calculateAverage(double[], int);
 void salesReport(double[], char*[]);
 void salesSummary(double[], char*[]);
-void movingAverageReport(double[], char*[]);
+void movingAveragesReport(double[], char*[]);
 void salesSortedReport(double[], char*[]);
-// this block of code creates the functions needed for the program
+
+int main() {
+    // Month names
+    char *months[] = {"January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"};
+    // Monthly sales data
+    double sales[MONTHS] = {
+        23458.01, 40112.00, 56011.85, 37820.88, 37904.67, 60200.22,72400.31, 56210.89, 67230.84, 68233.12, 80950.34, 95225.22};
+    // Print reports by calling functions
+    printf("Monthly sales report for 2022:\n");
+    salesReport(sales, months);
+
+    printf("\nSales summary:\n");
+    salesSummary(sales, months);
+
+    printf("\nSix-Month Moving Average Report:\n");
+    movingAveragesReport(sales, months);
+
+    printf("\nSales Report (Highest to Lowest):\n");
+    salesSortedReport(sales, months);
+
+    return 0;
+}
+
+// Function to calculate the average of monthly sales
+double calculateAverage(double sales[], int n) {
+    double sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += sales[i];
+    }
+    return sum / n;
+}
+
 // Function to generate and print the sales report
 void salesReport(double sales[], char *months[]) {
     printf("Month\t\tSales\n");
@@ -31,9 +64,7 @@ void salesSummary(double sales[], char *months[]) {
             maxIndex = i;
         }
     }
-
-    double average = average(sales, MONTHS);
-
+    double average = calculateAverage(sales, MONTHS);
     printf("Minimum sales: $%9.2f (%s)\n", min, months[minIndex]);
     printf("Maximum sales: $%9.2f (%s)\n", max, months[maxIndex]);
     printf("Average sales: $%9.2f\n", average);
@@ -51,7 +82,7 @@ void movingAveragesReport(double sales[], char *months[]) {
 }
 
 // Function to generate and print the sales report sorted from highest to lowest
-void saleSortedReport(double sales[], char *months[]) {
+void salesSortedReport(double sales[], char *months[]) {
     // Copying sales data to a temporary array for sorting
     double sortedSales[MONTHS];
     for (int i = 0; i < MONTHS; i++) {
@@ -80,13 +111,3 @@ void saleSortedReport(double sales[], char *months[]) {
         printf("%-9s\t$%9.2f\n", months[i], sortedSales[i]);
     }
 }
-
-int main() {
-    //Months names
-    char *months[] = {"January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"};
-    // Monthly sales data
-    double sales[MONTHS] = {23458.01, 40112.00, 56011.85, 37820.88, 37904.67, 60200.22,72400.31, 56210.89, 67230.84, 68233.12, 80950.34, 95225.22
-    };
-    // sales assoicated with months
-}
-
